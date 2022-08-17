@@ -1,8 +1,8 @@
-const signInBtn = document.querySelector( '.signin-btn');
-const signUpBtn = document.querySelector( '.signup-btn');
-const formBox = document.querySelector( '.form-box'); //контейнер для форм
-const formSignIn = document.querySelector( '.form_signin'); //форма авторизации
-const formSignUp = document.querySelector( '.form_signup'); // форма регистрации
+const signInBtn = document.querySelector('.signin-btn'); // кнопки отправки форм
+const signUpBtn = document.querySelector('.signup-btn');
+const formBox = document.querySelector('.form-box'); //контейнер для форм
+const formSignIn = document.querySelector('.form_signin'); //форма авторизации
+const formSignUp = document.querySelector('.form_signup'); // форма регистрации
 const body = document.body;
 const email_in = document.querySelector('.email_in'); // email формы авторизации
 const email_up = document.querySelector('.email_up');// email формы регистрации
@@ -10,6 +10,7 @@ const password = document.getElementById('password');// пароль формы 
 const password_up = document.getElementById('password_up'); // пароль формы регистрации
 const password_up_confirm = document.getElementById('password_up_confirm');//пароль подтверждение формы регистрации
 
+//ссылки на сервер и эндпойнты
 const userData = {};
 const url = 'https://immense-badlands-47107.herokuapp.com';
 const urlSignUp = '/auth/signUp';
@@ -19,7 +20,7 @@ const urlVerifyToken = '/auth/verifyToken';
 //переключение форм регистрации-авторизации
 signUpBtn.addEventListener('click', function () {
     formBox.classList.add('active');
-    body.classList.add ('active');
+    body.classList.add('active');
 });
 
 signInBtn.addEventListener('click', function () {
@@ -34,7 +35,7 @@ function showError(input, message) {
     const small = parentContainer.querySelector('small');
     small.innerText = message;
     small.style.visibility = 'visible';
-   }
+}
 
 // подсветка зеленым при правильном заполнении поля формы
 function showSuccess(input) {
@@ -53,7 +54,7 @@ function checkEmail(input) {
 
 //валидации пустых полей форм
 function checkRequired(inputArr) {
-    inputArr.forEach(function(input) {
+    inputArr.forEach(function (input) {
         if (input.value === '') {
             showError(input, `${getFieldName(input)} is required`);
         } else {
@@ -62,7 +63,7 @@ function checkRequired(inputArr) {
     });
 }
 
-// получить имя инпута
+// получить имя класса инпута
 function getFieldName(input) {
     return input.id.charAt(0).toUpperCase() + input.id.slice(1);
 }
@@ -92,9 +93,9 @@ function checkPasswordsMatch(input1, input2) {
 }
 
 // регистрация
-function signUp () {
-    fetch(url+urlSignUp, {
-        method:'POST',
+function signUp() {
+    fetch(url + urlSignUp, {
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json;charset=utf-8',
         },
@@ -106,9 +107,9 @@ function signUp () {
 }
 
 // авторизация
-function signIn () {
-    fetch(url+urlSignIn, {
-        method:'POST',
+function signIn() {
+    fetch(url + urlSignIn, {
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json;charset=utf-8',
         },
@@ -117,7 +118,7 @@ function signIn () {
         .then((response) => response.json())
         .then((data) => {
             if (data.token) {
-                return fetch (url+urlVerifyToken, {
+                return fetch(url + urlVerifyToken, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json;charset=utf-8',
@@ -134,31 +135,33 @@ function signIn () {
 }
 
 // слушатель на кнопку отправки формы регистрации
-formSignUp.addEventListener('submit', function(e) {
-    e.preventDefault();
+formSignUp.addEventListener('submit', function (e) {
 
+    e.preventDefault();
+//проверки валидности
     checkRequired([email_up, password_up, password_up_confirm]);
     checkEmail(email_up);
     checkLength(password_up, 6, 25);
     checkLength(password_up_confirm, 6, 25);
     checkPasswordsMatch(password_up, password_up_confirm);
-
+//присваиваем объекту userData значения из инпутов при вводе в форму регистрации
     userData.login = email_up.value;
     userData.createPassword = password_up.value;
     userData.confirmPassword = password_up_confirm.value;
 
-    signUp ();
-    });
+    signUp();
+});
 
 // слушатель на кнопку отправки формы авторизации
-formSignIn.addEventListener('submit', function(e) {
+formSignIn.addEventListener('submit', function (e) {
     e.preventDefault();
-
+//проверки валидности
     checkRequired([email_in, password]);
     checkEmail(email_in);
     checkLength(password, 6, 25);
-
+// присваиваем объекту userData значения из инпутов при вводе в форму авторизации
     userData.login = email_in.value;
     userData.createPassword = password.value;
+
     signIn();
 });
