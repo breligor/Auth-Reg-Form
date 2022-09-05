@@ -161,7 +161,7 @@ formSignIn.addEventListener('submit', function (e) {
     checkLength(password, 6, 25);
 // присваиваем объекту userData значения из инпутов при вводе в форму авторизации
     userData.login = email_in.value;
-    userData.createPassword = password.value;
+    userData.password = password.value;
 
     signIn();
 });
