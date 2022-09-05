@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="app.js" defer></script>
+    <title>Title</title>
+</head>
+<body>
+<article class="container">
+    <div class="block">
+        <section class="block_item block-item">
+            <h2 class="block-item_title">У Вас уже есть аккаунт?</h2>
+            <button class="block-item_btn signin-btn">Войти</button>
+        </section>
+        <section class="block_item block-item">
+            <h2 class="block-item_title">У Вас нет аккаунта?</h2>
+            <button class="block-item_btn signup-btn">Зарегистрироваться</button>
+        </section>
+    </div>
+    <div class="form-box">
+        <form class="form form_signin">
+            <h3 class="form_title">Вход</h3>
+            <div>
+                <input type="text" class="email_in form_input" placeholder="Email">
+                <small>Error message</small>
+            </div>
+
+            <div>
+                <input type="password" id="password" class="password form_input" placeholder="Пароль">
+                <small>Error message</small>
+            </div>
+
+            <div><button class="form_btn">Войти</button></div>
+            <div><a href="" class="form_forgot">Восстановить пароль</a> </div>
+        </form>
+
+        <form class="form form_signup">
+            <h3 class="form_title">Регистрация</h3>
+
+            <div>
+                <input type="text"  autocomplete="on" class="email_up form_input" placeholder="Email">
+                <small>Error message</small>
+            </div>
+
+            <div>
+                <input type="password" id="password_up" class="password form_input" placeholder="Пароль">
+                <small>Error message</small>
+            </div>
+
+            <div>
+                <input type="password" id="password_up_confirm" class="password form_input" placeholder="Подтвердите пароль">
+                <small>Error message</small>
+            </div>
+
+            <div><button class="form_btn form_btn_signup">Зарегистрироваться</button></div>
+        </form>
+    </div>
+</article>
+
+</body>
+</html>
